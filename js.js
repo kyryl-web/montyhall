@@ -13,21 +13,12 @@ function strategy2(arr, result) {
     for (let i = 0; i < iterations; i++) {
         let rndInit = Math.floor(Math.random() * (2 - 0 + 1)) + 0; //initial door choice
         let rndSec = rndInit; //what the host shows us (an empty door)
-        if (arr[rndInit] === 1) {
-            while (rndSec === rndInit) {
-                rndSec = Math.floor(Math.random() * (2 - 0 + 1)) + 0;
-            }
-        }
-        if (arr[rndInit] === 0) {
-            while (rndSec === rndInit || arr[rndSec] === 1) {
-                rndSec = Math.floor(Math.random() * (2 - 0 + 1)) + 0;
-            }
+
+        while (rndSec === rndInit || arr[rndSec] === 1) {
+            rndSec = Math.floor(Math.random() * (2 - 0 + 1)) + 0;
         }
         
-        let rndFinal = rndSec; //the door we switch to (which supposedly has a 2/3 chance)
-        while (rndFinal === rndSec || rndFinal === rndInit) {
-            rndFinal = Math.floor(Math.random() * (2 - 0 + 1)) + 0;
-        }
+        let rndFinal = 3 - rndInit - rndSec; //the door we switch to (which supposedly has a 2/3 chance)
         // console.log(arr[rndInit], arr[rndSec], arr[rndFinal])
         let elem = '' + arr[rndFinal];
         result[elem]++;
@@ -58,4 +49,5 @@ function giveaway(strategy) {
     return [result, resultWeight];
 }
 
-console.log(...giveaway(1))
+console.log('Strategy without door change: ', ...giveaway(1))
+console.log('Strategy with door change: ', ...giveaway(2))
