@@ -11,8 +11,8 @@ function strategy1(arr, result) {
 
 function strategy2(arr, result) {
     for (let i = 0; i < iterations; i++) {
-        let rndInit = Math.floor(Math.random() * (2 - 0 + 1)) + 0; //начальный выбор двери
-        let rndSec = rndInit; //то, то нам показывает ведущий (пустая дверь)
+        let rndInit = Math.floor(Math.random() * (2 - 0 + 1)) + 0; //initial door choice
+        let rndSec = rndInit; //what the host shows us (an empty door)
         if (arr[rndInit] === 1) {
             while (rndSec === rndInit) {
                 rndSec = Math.floor(Math.random() * (2 - 0 + 1)) + 0;
@@ -24,7 +24,7 @@ function strategy2(arr, result) {
             }
         }
         
-        let rndFinal = rndSec; //дверь, на кторую мы меняем наш начальный выбор (у которой якобы 2/3 шанс)
+        let rndFinal = rndSec; //the door we switch to (which supposedly has a 2/3 chance)
         while (rndFinal === rndSec || rndFinal === rndInit) {
             rndFinal = Math.floor(Math.random() * (2 - 0 + 1)) + 0;
         }
@@ -42,11 +42,11 @@ function giveaway(strategy) {
         '1' : 0
     }
 
-    if (strategy === 1) { //не меняем выбор двери
+    if (strategy === 1) { //do not change door choice
         strategy1(prizes, result);
     }
 
-    if (strategy === 2) { //меняем выбор двери
+    if (strategy === 2) { //change door choice
         strategy2(prizes, result);
     }
 
